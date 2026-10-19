@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CoreCatalog",
+  "type": "object",
+  "required": [
+    "entries",
+    "schema"
+  ],
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CoreCatalogEntry"
+      }
+    },
+    "schema": {
+      "type": "string",
+      "pattern": "^astra\\.emu\\.cores\\.v1$"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "CoreCatalogEntry": {
+      "type": "object",
+      "required": [
+        "abi",
+        "display_name",
+        "family_name",
+        "license",
+        "platform",
+        "plugin_id",
+        "release_tag",
+        "sha256",
+        "size",
+        "url",
+        "version"
+      ],
+      "properties": {
+        "abi": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "display_name": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "family_name": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "platform": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]{1,32}-[a-z0-9_]{1,32}$"
+        },
+        "plugin_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9._-]{1,128}$"
+        },
+        "release_tag": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._-]{1,128}$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size": {
+          "type": "integer",
+          "format": "uint64",
+          "maximum": 536870912.0,
+          "minimum": 1.0
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://github\\.com/2018wzh/AstraEngine/releases/download/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$"
+        },
+        "version": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

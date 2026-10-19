@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PresetDatabase",
+  "type": "object",
+  "required": [
+    "entries",
+    "schema"
+  ],
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Preset"
+      }
+    },
+    "schema": {
+      "type": "string",
+      "pattern": "^astra\\.emu\\.presets\\.v1$"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "Preset": {
+      "type": "object",
+      "required": [
+        "configuration",
+        "emulator",
+        "release_id",
+        "summary",
+        "vn_id"
+      ],
+      "properties": {
+        "configuration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "emulator": {
+          "type": "string",
+          "pattern": "^[a-z0-9._-]{1,128}$"
+        },
+        "patch": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z0-9._-]{1,128}$"
+        },
+        "release_id": {
+          "type": "string",
+          "pattern": "^r[0-9]{1,63}$"
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 120,
+          "minLength": 1
+        },
+        "vn_id": {
+          "type": "string",
+          "pattern": "^v[0-9]{1,63}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,7 @@
+AstraEMU-metadata 使用两种许可：
+
+- 数据（compatibility/、engines/、schema/ 以及发布产物中的 JSON 文件）：CC0-1.0，全文见 LICENSES/CC0-1.0.txt。
+- 补丁脚本与工具（patches/、tools/、tests/、.github/）：MIT OR Apache-2.0，由使用者任选其一，全文见 LICENSES/MIT.txt 与 LICENSES/Apache-2.0.txt。
+
+SPDX-License-Identifier: CC0-1.0 (data)
+SPDX-License-Identifier: MIT OR Apache-2.0 (patches, tools)

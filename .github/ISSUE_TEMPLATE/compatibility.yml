@@ -1,0 +1,79 @@
+name: 兼容性报告
+description: 报告某个 VNDB 发行版本在指定 AstraEMU 模拟器上的运行情况。
+title: "[compat] <vID> / <rID> · <模拟器> · <状态>"
+labels: ["compatibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        每份报告对应一个 VNDB 发行版本（rID）和一个模拟器。从 AstraEMU Manager 的「报告兼容性」打开本页时，作品、版本、模拟器和版本号会自动填好，只需选择兼容性并补充说明。
+
+        - vID 是 VNDB 作品 ID，例如 `v17`。
+        - rID 是你实际运行的发行版本 ID，例如 `r12345`。
+        - 维护者审核后加上 `compat:accepted` 标签，机器人会生成条目并开 PR。
+  - type: input
+    id: vid
+    attributes:
+      label: VNDB 作品 ID（vID）
+      description: 格式为 v 加数字。
+      placeholder: v17
+    validations:
+      required: true
+  - type: input
+    id: rid
+    attributes:
+      label: VNDB 发行版本 ID（rID）
+      description: 格式为 r 加数字。
+      placeholder: r12345
+    validations:
+      required: true
+  - type: input
+    id: emulator
+    attributes:
+      label: 模拟器
+      description: 模拟器的 plugin_id，可选 astra.emu.fvp、astra.emu.siglus、astra.emu.artemis、astra.emu.musica、sena-native-koikake、astra-emu-ethornell、astra-emu-krkr。
+      placeholder: astra.emu.musica
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: 运行平台
+      description: windows、linux、macos 或 android。
+      placeholder: windows
+    validations:
+      required: true
+  - type: input
+    id: emulator_version
+    attributes:
+      label: 模拟器版本
+      placeholder: 0.2.0
+    validations:
+      required: false
+  - type: input
+    id: manager_version
+    attributes:
+      label: Manager 版本
+      placeholder: 0.2.0
+    validations:
+      required: false
+  - type: dropdown
+    id: status
+    attributes:
+      label: 兼容性
+      options:
+        - 完美运行（perfect）
+        - 可通关（completable）
+        - 有瑕疵（flawed）
+        - 仅能启动（boot_only）
+        - 无法运行（unplayable）
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 说明
+      description: 最多 1024 字。写清楚哪些正常、哪些有问题，不要贴本机路径、账号或游戏文件。
+      placeholder: 能进入标题画面，第二章的视频花屏。
+    validations:
+      required: false

@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CompatibilityDatabase",
+  "type": "object",
+  "required": [
+    "entries",
+    "generated_at_unix_ms",
+    "schema"
+  ],
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CompatibilityEntry"
+      }
+    },
+    "generated_at_unix_ms": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "schema": {
+      "type": "string",
+      "pattern": "^astra\\.emu\\.compatibility\\.v3$"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "CompatibilityEntry": {
+      "type": "object",
+      "required": [
+        "emulator",
+        "platform",
+        "release_id",
+        "status",
+        "updated_at_unix_ms",
+        "vn_id"
+      ],
+      "properties": {
+        "emulator": {
+          "type": "string",
+          "pattern": "^[a-z0-9._-]{1,128}$"
+        },
+        "emulator_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "issue": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 1.0
+        },
+        "manager_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 64,
+          "minLength": 1
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1024
+        },
+        "platform": {
+          "type": "string",
+          "pattern": "^(windows|linux|macos|android)$"
+        },
+        "release_id": {
+          "type": "string",
+          "pattern": "^r[0-9]{1,63}$"
+        },
+        "status": {
+          "$ref": "#/definitions/CompatibilityStatus"
+        },
+        "updated_at_unix_ms": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "vn_id": {
+          "type": "string",
+          "pattern": "^v[0-9]{1,63}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompatibilityStatus": {
+      "type": "string",
+      "enum": [
+        "perfect",
+        "completable",
+        "flawed",
+        "boot_only",
+        "unplayable"
+      ]
+    }
+  }
+}
