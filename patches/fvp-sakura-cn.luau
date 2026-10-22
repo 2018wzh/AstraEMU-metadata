@@ -114,7 +114,7 @@ return {
         local map = ctx.create("astra-subtitles.json")
         map:write(0,buffer.fromstring(ctx.json.encode({version=1,tracks=output_tracks})))
         map:close()
-        return {plugin_id="astra.emu.fvp",configuration={script_encoding="shift_jis",
+        return {plugin_id="rfvp",configuration={script_encoding="shift_jis",
             translation_table="astra-translations.bin",subtitle_map="astra-subtitles.json"}}
     end,
 }

@@ -13,7 +13,7 @@ AstraEMU Manager 使用的公开数据：兼容性记录、推荐配置、核心
 | `schema/` | JSON Schema，由主仓 `astra-emu-metadata` crate 的 `export_schemas` 生成，不要手改 |
 | `tools/` | 校验、生成发布目录、处理 issue 的脚本 |
 
-模拟器 plugin_id：`astra.emu.fvp`、`astra.emu.siglus`、`astra.emu.artemis`、`astra.emu.musica`、`sena-native-koikake`、`astra-emu-ethornell`、`astra-emu-krkr`。
+模拟器 plugin_id：`rfvp`、`siglus_rs`、`art3m1s-core`、`astra.emu.musica`、`sena-rs`、`ethornell-rs`、`kirikiroid2-web`。
 
 兼容性分五级：`perfect`（完美运行）、`completable`（可通关）、`flawed`（有瑕疵）、`boot_only`（仅能启动）、`unplayable`（无法运行）。
 

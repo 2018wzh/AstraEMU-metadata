@@ -24,13 +24,13 @@ SCHEMA_FILES = {
 }
 
 KNOWN_EMULATORS = (
-    "astra.emu.fvp",
-    "astra.emu.siglus",
-    "astra.emu.artemis",
+    "rfvp",
+    "siglus_rs",
+    "art3m1s-core",
     "astra.emu.musica",
-    "sena-native-koikake",
-    "astra-emu-ethornell",
-    "astra-emu-krkr",
+    "sena-rs",
+    "ethornell-rs",
+    "kirikiroid2-web",
 )
 PLATFORMS = ("windows", "linux", "macos", "android")
 STATUSES = ("perfect", "completable", "flawed", "boot_only", "unplayable")

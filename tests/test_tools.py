@@ -19,7 +19,7 @@ r12345
 
 ### 模拟器
 
-sena-native-koikake
+sena-rs
 
 ### 运行平台
 
@@ -48,7 +48,7 @@ def form(**overrides: str) -> str:
     labels = {
         "vid": ("VNDB 作品 ID（vID）", "v17"),
         "rid": ("VNDB 发行版本 ID（rID）", "r12345"),
-        "emulator": ("模拟器", "sena-native-koikake"),
+        "emulator": ("模拟器", "sena-rs"),
         "platform": ("运行平台", "windows"),
     }
     body = FORM
@@ -100,7 +100,7 @@ class IssueToEntryTests(unittest.TestCase):
             {
                 "vn_id": "v17",
                 "release_id": "r12345",
-                "emulator": "sena-native-koikake",
+                "emulator": "sena-rs",
                 "status": "flawed",
                 "notes": "第二章视频花屏。\n其余正常。",
                 "emulator_version": "0.2.0",
@@ -128,8 +128,8 @@ class IssueToEntryTests(unittest.TestCase):
         self.assertIn("emulator", str(caught.exception))
 
     def test_ethornell_plugin_id_is_accepted(self) -> None:
-        entry = issue_to_entry.build_entry(form(emulator="astra-emu-ethornell"), 7, "2026-10-20T08:00:00Z")
-        self.assertEqual(entry["emulator"], "astra-emu-ethornell")
+        entry = issue_to_entry.build_entry(form(emulator="ethornell-rs"), 7, "2026-10-20T08:00:00Z")
+        self.assertEqual(entry["emulator"], "ethornell-rs")
 
     def test_cli_writes_entry_at_keyed_path(self) -> None:
         repository = FixtureRepository()
@@ -140,7 +140,7 @@ class IssueToEntryTests(unittest.TestCase):
             ["--body-file", str(body), "--issue", "42", "--labeled-at", "2026-10-20T08:00:00Z", "--root", str(repository.root)]
         )
         self.assertEqual(code, 0)
-        written = repository.root / "compatibility/entries/v17/r12345/sena-native-koikake.json"
+        written = repository.root / "compatibility/entries/v17/r12345/sena-rs.json"
         self.assertEqual(json.loads(written.read_text(encoding="utf-8"))["status"], "flawed")
         self.assertEqual(validate.collect(repository.root).errors, [])
 
@@ -225,7 +225,7 @@ class BuildIndexTests(unittest.TestCase):
         self.addCleanup(self.repository.close)
         self.repository.write("compatibility/entries/v17/r2/astra.emu.musica.json", compat_entry("r2"))
         self.repository.write(
-            "compatibility/entries/v17/r10/sena-native-koikake.json", compat_entry("r10", "sena-native-koikake", "flawed")
+            "compatibility/entries/v17/r10/sena-rs.json", compat_entry("r10", "sena-rs", "flawed")
         )
 
     def _build(self, name: str) -> Path:
