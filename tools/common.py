@@ -31,6 +31,8 @@ KNOWN_EMULATORS = (
     "sena-rs",
     "ethornell-rs",
     "kirikiroid2-web",
+    "ReMinori",
+    "impacto",
 )
 PLATFORMS = ("windows", "linux", "macos", "android")
 STATUSES = ("perfect", "completable", "flawed", "boot_only", "unplayable")

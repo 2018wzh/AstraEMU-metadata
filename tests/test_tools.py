@@ -144,6 +144,21 @@ class IssueToEntryTests(unittest.TestCase):
         self.assertEqual(json.loads(written.read_text(encoding="utf-8"))["status"], "flawed")
         self.assertEqual(validate.collect(repository.root).errors, [])
 
+    def test_mixed_case_emulator_survives_issue_import(self) -> None:
+        repository = FixtureRepository()
+        self.addCleanup(repository.close)
+        body = repository.root / "body.md"
+        body.write_text(form(emulator="ReMinori"), encoding="utf-8")
+        code = issue_to_entry.main(
+            ["--body-file", str(body), "--issue", "43", "--labeled-at", "2026-10-23T08:00:00Z", "--root", str(repository.root)]
+        )
+        self.assertEqual(code, 0)
+        imported = repository.root / "compatibility/entries/v17/r12345/ReMinori.json"
+        self.assertEqual(json.loads(imported.read_text(encoding="utf-8"))["emulator"], "ReMinori")
+        self.assertEqual(validate.collect(repository.root).errors, [])
+        with self.assertRaises(issue_to_entry.IssueFormError):
+            issue_to_entry.build_entry(form(emulator="reminori"), 44, "2026-10-23T08:00:00Z")
+
 
 class ValidateTests(unittest.TestCase):
     def setUp(self) -> None:

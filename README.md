@@ -13,7 +13,7 @@ AstraEMU Manager 使用的公开数据：兼容性记录、推荐配置、核心
 | `schema/` | JSON Schema，由主仓 `astra-emu-metadata` crate 的 `export_schemas` 生成，不要手改 |
 | `tools/` | 校验、生成发布目录、处理 issue 的脚本 |
 
-模拟器 plugin_id：`rfvp`、`siglus_rs`、`art3m1s-core`、`astra.emu.musica`、`sena-rs`、`ethornell-rs`、`kirikiroid2-web`。
+模拟器 plugin_id：`rfvp`、`siglus_rs`、`art3m1s-core`、`astra.emu.musica`、`sena-rs`、`ethornell-rs`、`kirikiroid2-web`、`ReMinori`、`impacto`。ID 保留上游仓库名称的大小写，核心目录、兼容性记录、推荐配置和 Manager 选择使用同一身份；`ReMinori` 与 `reminori` 不等价。登记 ID 不代表该核心或特定游戏已经通过可玩验收。
 
 兼容性分五级：`perfect`（完美运行）、`completable`（可通关）、`flawed`（有瑕疵）、`boot_only`（仅能启动）、`unplayable`（无法运行）。
 
