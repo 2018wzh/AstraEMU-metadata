@@ -2,21 +2,29 @@
   {
     "id": "musica-eden-cn",
     "title": "eden 中文姓名资源",
-    "script": "musica-eden-cn.luau"
+    "script": "musica-eden-cn.luau",
+    "vn_ids": ["v1286"],
+    "emulators": ["astra.emu.musica"]
   },
   {
     "id": "musica-ef-first-cn",
     "title": "ef first 中文姓名资源",
-    "script": "musica-ef-first-cn.luau"
+    "script": "musica-ef-first-cn.luau",
+    "vn_ids": ["v88"],
+    "emulators": ["astra.emu.musica"]
   },
   {
     "id": "fvp-sakura-cn",
     "title": "樱花萌放旧补丁离线转换",
-    "script": "fvp-sakura-cn.luau"
+    "script": "fvp-sakura-cn.luau",
+    "vn_ids": ["v22313"],
+    "emulators": ["rfvp"]
   },
   {
     "id": "musica-perseus-cn",
     "title": "夏空的英仙座旧补丁离线转换",
-    "script": "musica-perseus-cn.luau"
+    "script": "musica-perseus-cn.luau",
+    "vn_ids": ["v10597"],
+    "emulators": ["astra.emu.musica"]
   }
 ]

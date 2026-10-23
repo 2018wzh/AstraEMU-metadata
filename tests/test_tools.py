@@ -177,10 +177,32 @@ class ValidateTests(unittest.TestCase):
 
     def test_missing_catalog_script_fails(self) -> None:
         catalog = json.loads((self.repository.root / "patches/catalog.json").read_text(encoding="utf-8"))
-        catalog.append({"id": "missing", "title": "缺失脚本", "script": "missing.luau"})
+        catalog.append({"id": "missing", "title": "缺失脚本", "script": "missing.luau", "vn_ids": ["v17"], "emulators": ["astra.emu.musica"]})
         (self.repository.root / "patches/catalog.json").write_bytes(common.dump_json(catalog))
         errors = validate.collect(self.repository.root).errors
         self.assertTrue(any("missing.luau" in error for error in errors), errors)
+
+    def test_catalog_requires_valid_targets(self) -> None:
+        path = self.repository.root / "patches/catalog.json"
+        original = json.loads(path.read_text(encoding="utf-8"))
+        for field, value in (
+            ("vn_ids", []),
+            ("vn_ids", ["17"]),
+            ("vn_ids", ["v17", "v17"]),
+            ("vn_ids", "v17"),
+            ("emulators", []),
+            ("emulators", ["unknown-core"]),
+            ("emulators", None),
+        ):
+            catalog = json.loads(json.dumps(original))
+            catalog[0][field] = value
+            path.write_bytes(common.dump_json(catalog))
+            errors = validate.collect(self.repository.root).errors
+            self.assertTrue(any(field in error or "未知模拟器" in error for error in errors), (field, value, errors))
+        catalog = json.loads(json.dumps(original))
+        del catalog[0]["vn_ids"]
+        path.write_bytes(common.dump_json(catalog))
+        self.assertTrue(any("vn_ids" in error for error in validate.collect(self.repository.root).errors))
 
     def test_preset_patch_must_exist(self) -> None:
         preset = {

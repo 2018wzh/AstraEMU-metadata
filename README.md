@@ -17,6 +17,20 @@ AstraEMU Manager 使用的公开数据：兼容性记录、推荐配置、核心
 
 兼容性分五级：`perfect`（完美运行）、`completable`（可通关）、`flawed`（有瑕疵）、`boot_only`（仅能启动）、`unplayable`（无法运行）。
 
+## 汉化补丁目录
+
+`patches/catalog.json` 是数组，每个补丁一项，字段全部必填：
+
+| 字段 | 内容 |
+|---|---|
+| `id` | 补丁 id，全目录唯一；推荐配置的 `patch` 字段引用它 |
+| `title` | Manager 补丁页显示的名称 |
+| `script` | `patches/` 下的 Luau 脚本路径 |
+| `vn_ids` | 补丁适用的 VNDB 作品 ID（如 `v1286`），非空且不重复。补丁覆盖同一作品的多个发行版本时只写作品 ID；覆盖多部作品时全部列出 |
+| `emulators` | 补丁输出所用的模拟器 plugin_id，非空且不重复，取值见上面的列表 |
+
+Manager 只给已关联 VNDB 作品的游戏列出补丁：游戏的 vID 在 `vn_ids` 中，且游戏选定的模拟器（未选定时为识别出的候选模拟器）在 `emulators` 中。
+
 ## 提交兼容性报告
 
 1. 在 Manager 的作品详情→兼容性中点「报告兼容性」，或直接新建“兼容性报告” issue。

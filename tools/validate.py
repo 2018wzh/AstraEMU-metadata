@@ -171,9 +171,19 @@ def _check_patches(root: Path, dataset: Dataset) -> set[str]:
         catalog = []
     for number, recipe in enumerate(catalog):
         where = f"patches/catalog.json[{number}]"
-        if not isinstance(recipe, dict) or set(recipe) != {"id", "title", "script"} or not all(isinstance(value, str) for value in recipe.values()):
-            dataset.errors.append(f"{where}：必须只包含字符串字段 id、title、script")
+        fields = {"id", "title", "script", "vn_ids", "emulators"}
+        if not isinstance(recipe, dict) or set(recipe) != fields or not all(isinstance(recipe[name], str) for name in ("id", "title", "script")):
+            dataset.errors.append(f"{where}：必须只包含字段 id、title、script（字符串）与 vn_ids、emulators（数组）")
             continue
+        vn_ids, emulators = recipe["vn_ids"], recipe["emulators"]
+        if not isinstance(vn_ids, list) or not vn_ids or not all(isinstance(vid, str) and common.VN_ID.fullmatch(vid) for vid in vn_ids) or len(set(vn_ids)) != len(vn_ids):
+            dataset.errors.append(f"{where}：vn_ids 必须是不重复的 VNDB 作品 ID（v 加 1–12 位数字）组成的非空数组")
+        if not isinstance(emulators, list) or not emulators or not all(isinstance(emulator, str) for emulator in emulators) or len(set(emulators)) != len(emulators):
+            dataset.errors.append(f"{where}：emulators 必须是不重复的模拟器 plugin_id 组成的非空数组")
+        else:
+            for emulator in emulators:
+                if emulator not in common.KNOWN_EMULATORS:
+                    dataset.errors.append(f"{where}：未知模拟器 {emulator}")
         if not recipe["id"].strip() or "\0" in recipe["id"] or not recipe["title"].strip():
             dataset.errors.append(f"{where}：id 与 title 不能为空")
         elif recipe["id"] in recipe_ids:
