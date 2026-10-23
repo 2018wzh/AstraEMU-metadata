@@ -26,5 +26,12 @@
     "script": "musica-perseus-cn.luau",
     "vn_ids": ["v10597"],
     "emulators": ["astra.emu.musica"]
+  },
+  {
+    "id": "renpy-himanatsu",
+    "title": "HimaNatsu RPA 索引归一化",
+    "script": "renpy-himanatsu.luau",
+    "vn_ids": ["v425"],
+    "emulators": ["renpy"]
   }
 ]

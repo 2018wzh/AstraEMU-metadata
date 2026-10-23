@@ -31,7 +31,7 @@ body:
     id: emulator
     attributes:
       label: 模拟器
-      description: 模拟器的 plugin_id，可选 rfvp、siglus_rs、art3m1s-core、astra.emu.musica、sena-rs、ethornell-rs、kirikiroid2-web、ReMinori、impacto；大小写须与核心描述一致。
+      description: 模拟器的 plugin_id，可选 rfvp、siglus_rs、art3m1s-core、astra.emu.musica、sena-rs、ethornell-rs、kirikiroid2-web、ReMinori、impacto、renpy；大小写须与核心描述一致。
       placeholder: astra.emu.musica
     validations:
       required: true

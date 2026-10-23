@@ -33,6 +33,7 @@ KNOWN_EMULATORS = (
     "kirikiroid2-web",
     "ReMinori",
     "impacto",
+    "renpy",
 )
 PLATFORMS = ("windows", "linux", "macos", "android")
 STATUSES = ("perfect", "completable", "flawed", "boot_only", "unplayable")
